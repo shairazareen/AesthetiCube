@@ -19,7 +19,7 @@ urlpatterns = [
 
     ############## DASHBOARD ##############################
 
-    path('storesales', views.storesales, name = 'storesales'),
+    path('storesales', views.StoreSales, name = 'storesales'),
     path('genderdata', views.genderdata, name = 'genderdata'),
     path('productdata',views.productdata, name='productdata'),
     path('countrydata', views.countrydata, name = 'countrydata'),
