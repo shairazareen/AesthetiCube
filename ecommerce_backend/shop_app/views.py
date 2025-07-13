@@ -6,6 +6,13 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
+########################### DASHBOARD #################################
+
+from rest_framework import (viewsets, status, permissions as drf_permissions)
+from django.db.models import Sum, F, Func, Value, FloatField, IntegerField, Case, When
+from django.db.models.functions import Cast
+
+
 ##########################
 from django.conf import settings
 
@@ -221,5 +228,113 @@ def verify_otp(request):
     except User.DoesNotExist:
         return Response({'error': 'User not found'}, status=404)   
 
-######################
+#######################################3
+
+## DASHBOARD
+
+from rest_framework import permissions
+from .models import Product, StoreSales
+from .serializers import StoreSalesSerializer, GenderDataSerializer, CountryDataSerializer, ProductCategoryDataSerializer
+
+
+class StoreSalesViewset(viewsets.ViewSet): 
+    permission_classes = [permissions.AllowAny]
+    queryset = StoreSales.objects.all()
+    serializer_class = StoreSalesSerializer
+
+    def list(self, request): 
+        queryset = StoreSales.objects.all()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+    
+
+class GenderDataViewset(viewsets.ViewSet): 
+    permission_classes = [permissions.AllowAny]
+    queryset = StoreSales.objects.all()
+    serializer_class = GenderDataSerializer
+
+    def list(self, request): 
+        queryset = StoreSales.objects.values('gender', 'gender__name')\
+                   .annotate(quantity=Sum('quantity'))
+        
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+    
+class ProductCategoryViewset(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = StoreSales.objects.all()
+    serializer_class = ProductCategoryDataSerializer
+
+    def list(self, request): 
+        queryset = StoreSales.objects.values('product__category')\
+                   .annotate(total_quantity=Sum('quantity'))\
+                   .order_by('product__category')
+        
+        # Transform the data to match your serializer format
+        result = {
+            'canvas_art': 0,
+            'prints': 0,
+            'earrings': 0,
+            'neckpieces': 0,
+            'bags': 0,
+            'keyrings': 0,
+            'paper_craft': 0,
+            'gifts_for_her': 0,
+            'gifts_for_him': 0,
+            'gifts_for_kids': 0,
+            'birthday_boxes': 0
+        }
+
+        for item in queryset:
+            category = item['product__category']
+            if category in ['CANVAS', 'PRINTS', 'EARRINGS', 'NECKPIECES', 
+                          'BAGS', 'KEYRINGS', 'PAPER_CRAFT', 
+                          'GIFTS_FOR_HER', 'GIFTS_FOR_HIM', 
+                          'GIFTS_FOR_KIDS', 'BIRTHDAY_BOXES']:
+                result[category.lower()] = item['total_quantity']
+        
+        serializer = self.serializer_class(result)
+        return Response(serializer.data)
+    
+class CountryDataViewset(viewsets.ViewSet):
+    permission_classes = [permissions.AllowAny]
+    queryset = StoreSales.objects.all()
+    serializer_class = CountryDataSerializer
+
+    def list(self, request):
+        queryset = StoreSales.objects.values('date__month')\
+                   .annotate(quantityUnitedStates=Sum(
+                       Case(
+                           When(country__name="United States", then='quantity'),
+                           default=0,
+                           output_field=IntegerField()
+                       )
+                   ))\
+                   .annotate(quantityUnitedKingdom=Sum(
+                       Case(
+                           When(country__name="United Kingdom", then='quantity'),
+                           default=0,
+                           output_field=IntegerField()
+                       )
+                   ))\
+                   .annotate(quantityBangladesh=Sum(
+                       Case(
+                           When(country__name="Bangladesh", then='quantity'),
+                           default=0,
+                           output_field=IntegerField()
+                       )
+                   ))\
+                   .annotate(quantityIndia=Sum(
+                       Case(
+                           When(country__name="India", then='quantity'),
+                           default=0,
+                           output_field=IntegerField()
+                       )
+                   ))
+        
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+    
+    
 
