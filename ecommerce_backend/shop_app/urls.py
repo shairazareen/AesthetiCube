@@ -19,10 +19,10 @@ urlpatterns = [
 
     ############## DASHBOARD ##############################
 
-    path('storesales', views.StoreSales, name = 'storesales'),
-    path('genderdata', views.GenderData, name = 'genderdata'),
-    path('productdata',views.ProductCategory, name='productdata'),
-    path('countrydata', views.CountryData, name = 'countrydata'),
+    path('storesales', views.StoreSalesViewset.as_view({'get': 'list'}), name='storesales'),
+    path('genderdata', views.GenderDataViewset.as_view({'get': 'list'}), name='genderdata'),
+    path('productdata', views.ProductCategoryViewset.as_view({'get': 'list'}), name='productdata'),
+    path('countrydata', views.CountryDataViewset.as_view({'get': 'list'}), name='countrydata'),
 ]
 
 #fetching all_products: http://127.0.0.1:8001/products/
