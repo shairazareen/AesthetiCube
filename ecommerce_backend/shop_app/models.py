@@ -15,37 +15,31 @@ from datetime import timedelta
 ##########################################
 
 class Product(models.Model):
-    # Main Product Categories
-    MAIN_CATEGORY_CHOICES = [
+
+    CATEGORY_CHOICES = [
+        # Art Categories
         ('CANVAS', 'Canvas Art'),
         ('PRINTS', 'Prints'),
-        ('JEWELRY', 'Jewelry'),
-        ('ACCESSORIES', 'Accessories'),
-        ('CRAFT', 'Craft Supplies'),
-        ('GIFT', 'Gift Items'),
-    ]
-    
-    # Sub-categories for Gift Items
-    GIFT_CATEGORY_CHOICES = [
-        ('FOR_HER', 'Gift Ideas for Girls'),
-        ('FOR_HIM', 'Gift for Him'),
-        ('FOR_KIDS', 'Gift for Kids'),
-        ('BIRTHDAY', 'Birthday Surprise Boxes'),
-    ]
-    
-    # Craft Sub-categories
-    CRAFT_CATEGORY_CHOICES = [
+        
+        # Jewelry Categories
         ('EARRINGS', 'Earrings'),
-        ('HAIR_CLIP', 'Hair Clip'),
-        ('NECKPIECES', 'Neckpieces Set'),
+        ('NECKPIECES', 'Neckpieces'),
+        
+        # Accessories
         ('BAGS', 'Bags'),
         ('KEYRINGS', 'Key Rings'),
-        ('PAPER_CRAFT', 'Paper Craft DIY Kids'),
+        
+        # Crafts
+        ('PAPER_CRAFT', 'Paper Craft'),
+        
+        # Gifts
+        ('GIFTS_FOR_HER', 'Gifts for Her'),
+        ('GIFTs_FOR_HIM', 'Gifts for Him'),
+        ('GIFTS_FOR_KIDS', 'Gifts for Kids'),
+        ('BIRTHDAY_BOXES', 'Birthday Boxes'),
     ]
-
-    # Combined category field
-    CATEGORY_CHOICES = MAIN_CATEGORY_CHOICES + GIFT_CATEGORY_CHOICES + CRAFT_CATEGORY_CHOICES
-
+    
+    
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
     image = models.ImageField(upload_to='products/')
@@ -53,14 +47,11 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     
     category = models.CharField(
-        max_length=15,
+        max_length=20,
         choices=CATEGORY_CHOICES,
         blank=True
     )
-    
-    is_featured = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.name
@@ -156,20 +147,14 @@ class Order(models.Model):
 ##########################################
  #(cod)
 
-
-
 class Payment(models.Model):
-    PAYMENT_METHODS = [
-        ('COD', 'Cash on Delivery'),
-    ]
-    
     order = models.OneToOneField(Order, on_delete=models.CASCADE)
-    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS)
     is_paid = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.order.order_number} - {self.payment_method}"
+        return f"Payment for order {self.order.order_number}"
+
 
 ################ EMAIL OTP ####################
 
@@ -179,8 +164,26 @@ class EmailVerification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)
 
-    def is_expired(self):
-        return timezone.now() > self.created_at + timedelta(minutes=5)
-    
     def __str__(self):
-        return f"{self.user.email} - {self.otp}"
+        return f"Email verification for {self.user.email}"
+    
+
+########################### DASHBOARD ###################################
+
+class Country(models.Model): 
+    name = models.CharField(max_length=200)
+
+class Gender(models.Model): 
+    name = models.CharField(max_length=200)
+
+class CustomerType(models.Model): 
+    name = models.CharField(max_length=200)
+
+class StoreSales(models.Model): 
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField()
+    date = models.DateField()
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
+    customertype = models.ForeignKey(CustomerType, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
