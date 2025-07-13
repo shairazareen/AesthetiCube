@@ -21,7 +21,7 @@ urlpatterns = [
 
     path('storesales', views.StoreSales, name = 'storesales'),
     path('genderdata', views.GenderData, name = 'genderdata'),
-    path('productdata',views.productdata, name='productdata'),
+    path('productdata',views.ProductCategory, name='productdata'),
     path('countrydata', views.CountryData, name = 'countrydata'),
 ]
 
