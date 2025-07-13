@@ -2,6 +2,12 @@ from rest_framework import serializers
 from .models import Product, Cart, CartItem, Order, Payment
 from django.contrib.auth import get_user_model
 
+############## DASHBOARD ##############################
+from .models import *
+import calendar
+
+###########################################################
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -91,17 +97,79 @@ class UserSerializer(serializers.ModelSerializer):
 # (cod)
 
 class PaymentSerializer(serializers.ModelSerializer):
+    order_number = serializers.CharField(source='order.order_number', read_only=True)
+    status = serializers.SerializerMethodField()
+
     class Meta:
         model = Payment
-        fields = ['payment_method', 'is_paid', 'created_at']
+        fields = ['id', 'order_number', 'is_paid', 'status', 'created_at']
+        read_only_fields = ['id', 'created_at']
+
+    def get_status(self, obj):
+        return "Paid" if obj.is_paid else "Pending"
 
 class OrderSerializer(serializers.ModelSerializer):
     payment = PaymentSerializer(read_only=True)
-    
     class Meta:
         model = Order
         fields = '__all__'
-        
+
 ##############################################################
+
+#(dashboard)
+
+class StoreSalesSerializer(serializers.ModelSerializer): 
+    gender = serializers.SlugRelatedField(
+        queryset=Gender.objects.all(), 
+        slug_field='name'
+    )
+
+    country = serializers.SlugRelatedField(
+        queryset=Country.objects.all(), 
+        slug_field='name'
+    )
+
+    customertype = serializers.SlugRelatedField(
+        queryset=CustomerType.objects.all(), 
+        slug_field='name'
+    )
+
+
+    class Meta: 
+        model = StoreSales
+        fields = ('id', 'unit_price', 'quantity', 'date', 'country', 'gender', 'customertype', 'product')
+
+
+class GenderDataSerializer(serializers.Serializer): 
+    id = serializers.IntegerField(source='gender')
+    label = serializers.CharField(source= 'gender__name')
+    value = serializers.IntegerField(source='quantity')
+
+
+class ProductCategoryDataSerializer(serializers.Serializer):
+    category = serializers.CharField()
+    canvas_art = serializers.IntegerField(default=0)
+    prints = serializers.IntegerField(default=0)
+    earrings = serializers.IntegerField(default=0)
+    neckpieces = serializers.IntegerField(default=0)
+    bags = serializers.IntegerField(default=0)
+    keyrings = serializers.IntegerField(default=0)
+    paper_craft = serializers.IntegerField(default=0)
+    gifts_for_her = serializers.IntegerField(default=0)
+    gifts_for_him = serializers.IntegerField(default=0)
+    gifts_for_kids = serializers.IntegerField(default=0)
+    birthday_boxes = serializers.IntegerField(default=0)
+
+
+class CountryDataSerializer(serializers.Serializer):
+    date__month = serializers.CharField()
+    quantityUnitedStates = serializers.IntegerField()
+    quantityUnitedKingdom = serializers.IntegerField()
+    quantityBangladesh = serializers.IntegerField()
+    quantityIndia = serializers.IntegerField()
+    month_name = serializers.SerializerMethodField()
+
+    def get_month_name(self,obj):
+        return calendar.month_name[obj['date__month']]
 
 
