@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.urls import path
 from . import views
 
@@ -13,8 +14,18 @@ urlpatterns = [
     path('get_username', views.get_username, name = "get_username"),
     path('user_info', views.user_info, name = 'user_info'),
     path('create_order/', views.create_order, name='create_order'),
-    path('send-otp/', views.send_otp),
-    path('verify-otp/', views.verify_otp),
+    path('send_otp/', views.send_otp, name = 'send_otp'),
+    path('verify_otp/', views.verify_otp, name = 'verify_otp'),
+
+    ############## DASHBOARD ##############################
+
+    path('storesales', views.storesales, name = 'storesales'),
+    path('genderdata', views.genderdata, name = 'genderdata'),
+    path('productdata',views.productdata, name='productdata'),
+    path('countrydata', views.countrydata, name = 'countrydata'),
 ]
 
 #fetching all_products: http://127.0.0.1:8001/products/
+
+
+
