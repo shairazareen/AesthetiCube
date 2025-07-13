@@ -20,9 +20,9 @@ urlpatterns = [
     ############## DASHBOARD ##############################
 
     path('storesales', views.StoreSales, name = 'storesales'),
-    path('genderdata', views.genderdata, name = 'genderdata'),
+    path('genderdata', views.GenderData, name = 'genderdata'),
     path('productdata',views.productdata, name='productdata'),
-    path('countrydata', views.countrydata, name = 'countrydata'),
+    path('countrydata', views.CountryData, name = 'countrydata'),
 ]
 
 #fetching all_products: http://127.0.0.1:8001/products/
