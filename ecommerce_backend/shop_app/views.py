@@ -335,6 +335,20 @@ class CountryDataViewset(viewsets.ViewSet):
         
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
-    
+
+######################################################################
+
+
+# views.py
+import requests
+from django.http import JsonResponse
+
+@api_view(['GET'])
+def get_ip_info(request):
+    try:
+        response = requests.get("https://ipapi.co/json")
+        return JsonResponse(response.json())
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
     
 
