@@ -23,6 +23,9 @@ urlpatterns = [
     path('genderdata/', views.GenderDataViewset.as_view({'get': 'list'}), name='genderdata'),
     path('productdata/', views.ProductCategoryViewset.as_view({'get': 'list'}), name='productdata'),
     path('countrydata/', views.CountryDataViewset.as_view({'get': 'list'}), name='countrydata'),
+
+    #########################################
+    path('ipinfo/', views.get_ip_info, name='ipinfo'),
 ]
 
 #fetching all_products: http://127.0.0.1:8001/products/
