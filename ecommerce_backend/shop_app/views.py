@@ -342,6 +342,7 @@ class CountryDataViewset(viewsets.ViewSet):
 # views.py
 import requests
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
 
 @api_view(['GET'])
 def get_ip_info(request):
