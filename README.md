@@ -1,4 +1,4 @@
-# Azza'h Crafts 🛒
+# Azza'h Crafts 🛒🎨
 
 This project is a comprehensive backend system for an e-commerce platform, developed using Django and Django REST Framework. It provides a wide range of secure and scalable API endpoints that power the core functionalities of an online store.
 
