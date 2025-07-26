@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-hq$kc)ov)v-#fro(9ib0s@%451%r@_-0@f%dw!=9ht(%0wlgeb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["      ", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["https://aestheticube-api.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
