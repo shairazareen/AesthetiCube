@@ -219,7 +219,7 @@ from functools import wraps
 from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from django_ratelimit.decorators import ratelimit
+#from django_ratelimit.decorators import ratelimit
 from .models import EmailVerification
 import time
 
