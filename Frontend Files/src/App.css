@@ -1,0 +1,155 @@
+/* frontend_files/src/App.css */
+
+/* Define your theme using CSS variables */
+:root {
+  /* --- Core Colors --- */
+  --color-primary-bg: #FEFFF2;         /* Primary Background / Page Background */
+  --color-secondary-bg: #D4D5BC;       /* Secondary Background */
+  --color-lines: #474723;              /* Lines and Dividers */
+  --color-text-primary: #474723;       /* Titles, Subtitles, Body Text, Secondary Text */
+  --color-link-action: #757557;        /* Links and Actions */
+
+  /* --- Accent Colors --- */
+  --color-accent-light: #EDEFDF;       /* Lighter Accent Color */
+  --color-accent-medium: #D4D5BC;      /* Medium Accent Color (same as secondary bg) */
+
+
+  /* --- Button Colors --- */
+  /* Primary Button */
+  --color-button-primary-bg: #474723;  /* Primary Button Fill & Border (Regular) */
+  --color-button-primary-text: #FEFFF2; /* Primary Button Text (Regular) */
+  --color-button-primary-hover-bg: #FEFFF2; /* Primary Button Fill (Hover) */
+  --color-button-primary-hover-text: #474723; /* Primary Button Border & Text (Hover) */
+
+  /* Secondary Button */
+  --color-button-secondary-bg: #FEFFF2; /* Secondary Button Fill (Regular) */
+  --color-button-secondary-text: #474723; /* Secondary Button Border & Text (Regular) */
+  --color-button-secondary-hover-bg: #474723; /* Secondary Button Fill & Border (Hover) */
+  --color-button-secondary-hover-text: #FEFFF2; /* Secondary Button Text (Hover) */
+
+
+  /* --- Fonts --- */
+  --font-family-main: 'Fahkwang', sans-serif;
+  --font-size-base: 16px; /* Base font size for body text */
+  --font-size-title: 28px; /* Example title size */
+  --font-size-subtitle: 20px; /* Example subtitle size */
+  --font-size-heading1: 24px; /* Example H1 */
+  --font-size-heading2: 21px; /* Example H2 */
+  --font-size-heading3: 19px; /* Example H3 */
+  --line-height-base: 1.4em; /* Base line height */
+}
+
+/* Apply base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-main);
+  background-color: var(--color-primary-bg);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+/* Ensure the main App container takes full width/height if needed */
+.App {
+  width: 100%;
+  min-height: 100vh; /* Ensures it covers at least the viewport height */
+  display: flex;
+  flex-direction: column; /* Stack navbar, content, footer vertically */
+}
+
+/* --- Basic Button Styles --- */
+/* You can refine these in component-specific CSS files later */
+button {
+  font-family: var(--font-family-main);
+  font-size: 16px; /* Standard button text size */
+  line-height: 1.4em;
+  border-radius: 0px; /* As per your theme description */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth hover transition */
+}
+
+/* Primary Button */
+.primary-button {
+  background-color: var(--color-button-primary-bg);
+  color: var(--color-button-primary-text);
+  border: 1px solid var(--color-button-primary-bg); /* Border same as bg */
+  padding: 10px 20px; /* Example padding */
+}
+
+.primary-button:hover {
+  background-color: var(--color-button-primary-hover-bg);
+  color: var(--color-button-primary-hover-text);
+  border: 1px solid var(--color-button-primary-hover-text); /* Border changes on hover */
+}
+
+/* Secondary Button */
+.secondary-button {
+  background-color: var(--color-button-secondary-bg);
+  color: var(--color-button-secondary-text);
+  border: 1px solid var(--color-button-secondary-text); /* Border defined */
+  padding: 10px 20px; /* Example padding */
+}
+
+.secondary-button:hover {
+  background-color: var(--color-button-secondary-hover-bg);
+  color: var(--color-button-secondary-hover-text);
+  border: 1px solid var(--color-button-secondary-hover-bg); /* Border changes on hover */
+}
+
+/* --- Divider/Line Style --- */
+.divider {
+  height: 1px;
+  background-color: var(--color-lines);
+  border: none;
+  margin: 20px 0; /* Example margin */
+}
+
+/* --- Link Style --- */
+a {
+  color: var(--color-link-action);
+  text-decoration: none; /* Remove default underline */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* --- Title Styles --- */
+h1 {
+  font-size: var(--font-size-title);
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: var(--font-size-subtitle);
+  margin-bottom: 0.5em;
+}
+
+h3 {
+   font-size: var(--font-size-heading3);
+   margin-bottom: 0.5em;
+}
+
+/* --- Paragraph Style --- */
+p {
+  margin-bottom: 1em; /* Add space below paragraphs */
+}
+
+/* --- Accent Color Usage Examples (Optional Classes) --- */
+/* You can use these classes directly in your JSX if needed */
+.bg-accent-light {
+  background-color: var(--color-accent-light);
+}
+
+.bg-accent-medium {
+  background-color: var(--color-accent-medium); /* Same as --color-secondary-bg */
+}
+
+.text-accent-medium {
+  color: var(--color-accent-medium);
+}
+
+.border-accent-medium {
+  border-color: var(--color-accent-medium);
+}

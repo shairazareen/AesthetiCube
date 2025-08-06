@@ -1,0 +1,136 @@
+/* src/pages/Home/Homepage.css */
+
+@font-face {
+  font-family: 'Fahkwang';
+  src: url('../../assets/fonts/Fahkwang-Regular.woff2') format('woff2'),
+       url('../../assets/fonts/Fahkwang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fahkwang';
+  src: url('../../assets/fonts/Fahkwang-Bold.woff2') format('woff2'),
+       url('../../assets/fonts/Fahkwang-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: block;
+  font-display: swap;
+}
+
+.homepage-content {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.homepage-content.fonts-loaded {
+  opacity: 1;
+}
+
+.left-half {
+  background-color: #FEFFF2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.right-half {
+  flex: 1;
+  position: relative;
+}
+
+.title {
+  font-family: 'Fahkwang';
+  font-size: 3rem;
+  color: #474723;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.description {
+  font-family: 'Fahkwang';
+  font-size: 1.2rem;
+  color: #474723;
+  margin-bottom: 2rem;
+  max-width: 80%;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease-out 0.2s forwards;
+}
+
+.cta-button {
+  font-family: 'Fahkwang';
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  background-color: #474723;
+  color: #FEFFF2;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease-out 0.4s forwards;
+}
+
+.cta-button:hover {
+  background-color: #333319;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Slide-up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animations with different delays */
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.title.slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.description.slide-up {
+  animation: slideUp 0.8s ease-out 0.2s forwards;
+}
+
+.cta-button.slide-up {
+  animation: slideUp 0.8s ease-out 0.4s forwards;
+}
+

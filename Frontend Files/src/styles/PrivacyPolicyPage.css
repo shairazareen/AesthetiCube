@@ -1,0 +1,107 @@
+/* src/pages/PrivacyPolicy/PrivacyPolicyPage.css */
+/* Import Fahkwang font */
+@import url('https://fonts.googleapis.com/css2?family=Fahkwang:wght@400;500;600;700&display=swap');
+
+/* --- Main Container & Overall Text --- */
+.privacy-policy-container {
+  background-color: #FEFFF2; /* Background color */
+  min-height: 100vh; /* Full viewport height */
+  padding: 2rem; /* Padding around content */
+  /* --- Use Fahkwang for all main text --- */
+  font-family: 'Fahkwang', sans-serif;
+  color: #474723; /* Text color */
+  line-height: 1.6; /* Readability */
+  font-size: 15px; /* Base font size for body text */
+}
+
+/* --- Large Header "Privacy Policy" --- */
+.privacy-policy-header {
+  text-align: center; /* Center the entire block */
+  margin: 3rem auto 5rem auto; /* Top margin, auto sides, bottom margin */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center items horizontally within the flex container */
+  justify-content: center; /* Center items vertically within the flex container (if there's extra space) */
+  gap: 1rem; /* Space between "Privacy" and "Policy" */
+  /* No text-decoration here */
+}
+
+.privacy-policy-title,
+.privacy-policy-subtitle {
+  font-family: 'Fahkwang', sans-serif; /* Use Fahkwang */
+  font-size: 67px;
+  color: #474723;
+  margin: 0; /* Remove default margins */
+  font-weight: normal; /* Ensure they are not bold */
+  line-height: 1; /* Tighten line height if needed for precise spacing */
+}
+
+/* --- Content Area --- */
+.privacy-policy-content {
+  max-width: 600px; /* Limit width for readability */
+  margin: 0 auto; /* Center the block */
+  text-align: left; /* Align text left */
+}
+
+/* --- Main Text Paragraphs --- */
+.privacy-policy-text {
+  /* Font family inherited from .privacy-policy-container */
+  /* --- Font size 15px --- */
+  font-size: 15px;
+  /* Color inherited from .privacy-policy-container */
+  margin-bottom: 3.0rem; /* Space between paragraphs */
+}
+
+/* --- Section Headings (e.g., "1. Information We Collect") --- */
+.privacy-policy-heading {
+  /* Font family inherited from .privacy-policy-container */
+  /* --- Font size 15px (same as body text) --- */
+  font-size: 19px;
+  /* Color inherited from .privacy-policy-container */
+  /* --- Make it bold to stand out --- */
+  font-weight: normal; /* Semi-bold, adjust if needed (e.g., 700 for bold) */
+  /* --- Add some space above and below --- */
+  margin-top: 1.5rem; /* Space above heading */
+  margin-bottom: 0.5rem; /* Space below heading */
+  /* --- Optional: Add slight indentation or other styling --- */
+  /* text-indent: 10px; */
+}
+
+/* --- Lists --- */
+.privacy-policy-list {
+  margin-top: 0.5rem; /* Space above list */
+  margin-bottom: 1rem; /* Space below list */
+  padding-left: 1.5rem; /* Indent list items */
+}
+
+.privacy-policy-list-item {
+  /* Font family inherited */
+  /* --- Font size 15px --- */
+  font-size: 15px;
+  /* Color inherited */
+  margin-bottom: 0.3rem; /* Space between list items */
+}
+
+/* --- Links --- */
+.privacy-policy-link {
+  color: #474723; /* Link color */
+  text-decoration: underline; /* Underline links */
+}
+
+.privacy-policy-link:hover {
+  color: #2e2e17; /* Darker color on hover */
+}
+
+/* --- Last Updated (if still used, though replaced by Effective Date) --- */
+/* If you have a specific class for last updated, style it similarly to effective date or remove if unused */
+/*
+.privacy-policy-last-updated {
+  font-style: italic;
+  margin-top: 2rem;
+  text-align: center;
+}
+*/
+
+.privacy-policy-contact-list-last {
+  margin-bottom: 20rem; /* Adjust the value (e.g., 2rem, 4rem) to get the desired space */
+}
