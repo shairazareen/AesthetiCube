@@ -457,7 +457,7 @@ from django.conf import settings
 
 def home_page(request):
     # Read the HTML file
-    html_file_path = os.path.join(settings.BASE_DIR, 'static', 'index.html')
+    html_file_path = os.path.join(settings.BASE_DIR, 'templates', 'index.html')
     try:
         with open(html_file_path, 'r') as file:
             html_content = file.read()
@@ -477,5 +477,6 @@ def home_page(request):
         </html>
         ''', content_type='text/html')
     
+
 
 
