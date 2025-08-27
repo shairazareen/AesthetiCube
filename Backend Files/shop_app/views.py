@@ -448,6 +448,34 @@ class CountryDataViewset(viewsets.ViewSet):
         
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+
+##### HOMEPAGE ###
+# In views.py
+from django.http import HttpResponse
+import os
+from django.conf import settings
+
+def home_page(request):
+    # Read the HTML file
+    html_file_path = os.path.join(settings.BASE_DIR, 'static', 'index.html')
+    try:
+        with open(html_file_path, 'r') as file:
+            html_content = file.read()
+        return HttpResponse(html_content, content_type='text/html')
+    except FileNotFoundError:
+        # Fallback if file doesn't exist
+        return HttpResponse('''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>AesthetiCube</title>
+        </head>
+        <body>
+            <h1>Welcome to AesthetiCube</h1>
+            <p>Born from a love of soulful design...</p>
+        </body>
+        </html>
+        ''', content_type='text/html')
     
-    
+
 
