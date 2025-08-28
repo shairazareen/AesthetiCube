@@ -30,7 +30,7 @@
 }
 
 .title {
-  font-family: 'Fahkwang', Arial, sans-serif; /* Added fallback font */
+  font-family: 'Comic Sans'; /* Added fallback font */
   font-size: 3rem;
   color: #474723;
   margin-bottom: 1rem;
@@ -118,3 +118,4 @@
 .cta-button.slide-up {
   animation: slideUp 0.8s ease-out 0.4s forwards;
 }
+
